@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="get" class="filters">
+  <label>Status
+    <select name="status" onchange="this.form.submit()">
+      <option value="">All</option>
+      {% for choice in status_choices %}
+        <option value="{{ choice }}" {% if status == choice %}selected{% endif %}>{{ choice.replace('_', ' ') }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Sort by
+    <select name="order_by" onchange="this.form.submit()">
+      <option value="date_added" {% if order_by == 'date_added' %}selected{% endif %}>Date added</option>
+      <option value="price_numeric" {% if order_by == 'price_numeric' %}selected{% endif %}>Price</option>
+      <option value="bedrooms" {% if order_by == 'bedrooms' %}selected{% endif %}>Bedrooms</option>
+      <option value="distance_to_station_m" {% if order_by == 'distance_to_station_m' %}selected{% endif %}>Distance to station</option>
+      <option value="commute_to_flinders_min" {% if order_by == 'commute_to_flinders_min' %}selected{% endif %}>Commute to Flinders</option>
+      <option value="suburb" {% if order_by == 'suburb' %}selected{% endif %}>Suburb</option>
+    </select>
+  </label>
+  <label><input type="checkbox" name="qualifying" value="1" {% if only_qualifying %}checked{% endif %} onchange="this.form.submit()"> Only show listings that meet all criteria</label>
+</form>
+
+{% if not rows %}
+  <p class="empty">No listings yet. <a href="{{ url_for('new_listing') }}">Add your first listing</a>.</p>
+{% endif %}
+
+<div class="cards">
+{% for row in rows %}
+  {% set listing = row.listing %}
+  {% set checks = row.checks %}
+  <a class="card {% if row.qualifies %}qualifies{% endif %}" href="{{ url_for('view_listing', listing_id=listing.id) }}">
+    <div class="card-header">
+      <h2>{{ listing.address }}</h2>
+      <span class="badge status-{{ listing.status }}">{{ listing.status.replace('_', ' ') }}</span>
+    </div>
+    <p class="suburb">{{ listing.suburb }}{% if listing.price_text %} &middot; {{ listing.price_text }}{% endif %}</p>
+    <div class="criteria-row">
+      {% for name, value in checks.items() %}
+        {% set passed = value[0] %}
+        <span class="chip {% if passed == true %}pass{% elif passed == false %}fail{% else %}unknown{% endif %}" title="{{ value[1] }}">
+          {{ name.replace('_', ' ') }}
+        </span>
+      {% endfor %}
+    </div>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}
