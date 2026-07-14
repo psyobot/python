@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Real Estate Tracker{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1><a href="{{ url_for('index') }}">Real Estate Tracker</a></h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Listings</a>
+      <a href="{{ url_for('new_listing') }}">+ Add Listing</a>
+      <a href="{{ url_for('settings') }}">Settings</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

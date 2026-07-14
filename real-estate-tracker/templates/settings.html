@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Settings</h2>
+
+<section>
+  <h3>Blue chip suburbs</h3>
+  <p>One suburb per line. A listing's suburb is checked against this list (case-insensitive).</p>
+  <form method="post">
+    <textarea name="blue_chip_suburbs" rows="12" cols="40">{{ blue_chip_suburbs }}</textarea>
+    <div>
+      <button type="submit">Save</button>
+    </div>
+  </form>
+</section>
+
+<section>
+  <h3>Fixed thresholds</h3>
+  <p>These are hard-coded to match your buying criteria:</p>
+  <ul>
+    <li>Bedrooms &ge; {{ criteria.MIN_BEDROOMS }}</li>
+    <li>Bathrooms &ge; {{ criteria.MIN_BATHROOMS }}</li>
+    <li>Distance to nearest station &le; {{ criteria.MAX_STATION_DISTANCE_M }} m</li>
+    <li>Door-to-door commute to Flinders St &le; {{ criteria.MAX_COMMUTE_TO_FLINDERS_MIN }} min</li>
+    <li>North facing ({{ criteria.NORTH_ASPECTS|join(', ') }}) or marked "full of light" (soft preference, doesn't disqualify)</li>
+  </ul>
+</section>
+{% endblock %}
