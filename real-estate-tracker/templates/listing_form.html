@@ -6,24 +6,24 @@
     <legend>Basics</legend>
     <label>Address <input name="address" required value="{{ listing.address if listing else '' }}"></label>
     <label>Suburb <input name="suburb" required value="{{ listing.suburb if listing else '' }}"></label>
-    <label>Price (display) <input name="price_text" value="{{ listing.price_text if listing else '' }}" placeholder="Offers over $1.2m"></label>
-    <label>Price (numeric, for sorting) <input type="number" step="1" name="price_numeric" value="{{ listing.price_numeric if listing else '' }}"></label>
-    <label>Listing URL <input name="listing_url" value="{{ listing.listing_url if listing else '' }}"></label>
+    <label>Price (display) <input name="price_text" value="{{ (listing.price_text if listing else '') or '' }}" placeholder="Offers over $1.2m"></label>
+    <label>Price (numeric, for sorting) <input type="number" step="1" name="price_numeric" value="{{ (listing.price_numeric if listing else '') or '' }}"></label>
+    <label>Listing URL <input name="listing_url" value="{{ (listing.listing_url if listing else '') or '' }}"></label>
   </fieldset>
 
   <fieldset>
     <legend>Layout</legend>
-    <label>Bedrooms <input type="number" name="bedrooms" min="0" value="{{ listing.bedrooms if listing else '' }}"></label>
-    <label>Bathrooms <input type="number" name="bathrooms" min="0" value="{{ listing.bathrooms if listing else '' }}"></label>
-    <label>Car spaces <input type="number" name="car_spaces" min="0" value="{{ listing.car_spaces if listing else '' }}"></label>
-    <label>Land size (sqm) <input type="number" step="0.1" name="land_size_sqm" value="{{ listing.land_size_sqm if listing else '' }}"></label>
+    <label>Bedrooms <input type="number" name="bedrooms" min="0" value="{{ (listing.bedrooms if listing else '') or '' }}"></label>
+    <label>Bathrooms <input type="number" name="bathrooms" min="0" value="{{ (listing.bathrooms if listing else '') or '' }}"></label>
+    <label>Car spaces <input type="number" name="car_spaces" min="0" value="{{ (listing.car_spaces if listing else '') or '' }}"></label>
+    <label>Land size (sqm) <input type="number" step="0.1" name="land_size_sqm" value="{{ (listing.land_size_sqm if listing else '') or '' }}"></label>
   </fieldset>
 
   <fieldset>
     <legend>Location &amp; commute</legend>
-    <label>Nearest station <input name="nearest_station" value="{{ listing.nearest_station if listing else '' }}"></label>
-    <label>Distance to station (m) <input type="number" name="distance_to_station_m" value="{{ listing.distance_to_station_m if listing else '' }}"></label>
-    <label>Door-to-door commute to Flinders St (min) <input type="number" name="commute_to_flinders_min" value="{{ listing.commute_to_flinders_min if listing else '' }}"></label>
+    <label>Nearest station <input name="nearest_station" value="{{ (listing.nearest_station if listing else '') or '' }}"></label>
+    <label>Distance to station (m) <input type="number" name="distance_to_station_m" value="{{ (listing.distance_to_station_m if listing else '') or '' }}"></label>
+    <label>Door-to-door commute to Flinders St (min) <input type="number" name="commute_to_flinders_min" value="{{ (listing.commute_to_flinders_min if listing else '') or '' }}"></label>
   </fieldset>
 
   <fieldset>
@@ -50,10 +50,10 @@
         {% endfor %}
       </select>
     </label>
-    <label>Inspection date <input type="date" name="inspection_date" value="{{ listing.inspection_date if listing else '' }}"></label>
-    <label>Agent name <input name="agent_name" value="{{ listing.agent_name if listing else '' }}"></label>
-    <label>Agent phone <input name="agent_phone" value="{{ listing.agent_phone if listing else '' }}"></label>
-    <label>Notes <textarea name="notes" rows="4">{{ listing.notes if listing else '' }}</textarea></label>
+    <label>Inspection date <input type="date" name="inspection_date" value="{{ (listing.inspection_date if listing else '') or '' }}"></label>
+    <label>Agent name <input name="agent_name" value="{{ (listing.agent_name if listing else '') or '' }}"></label>
+    <label>Agent phone <input name="agent_phone" value="{{ (listing.agent_phone if listing else '') or '' }}"></label>
+    <label>Notes <textarea name="notes" rows="4">{{ (listing.notes if listing else '') or '' }}</textarea></label>
   </fieldset>
 
   <button type="submit">Save</button>
